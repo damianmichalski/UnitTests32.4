@@ -1,25 +1,30 @@
 const formatDate = (timeInSeconds) => {
-    const day = timeInSeconds / 86400;
-    let rest = timeInSeconds % 86400;
-    const h = rest / 3600;
-    rest = rest % 3600;
-    const min =  rest / 60;
-    const sec = rest % 60;
+    const dayInSeconds = 86400;
+    const day = Math.floor(timeInSeconds / dayInSeconds);
+    let rest = timeInSeconds % dayInSeconds;
+    const dayInHours = 3600;
+    const hours = Math.floor(rest / dayInHours);
+    rest = rest % dayInHours;
+    const dayInMinutes = 60;
+    const min =  Math.floor(rest / dayInMinutes);
+    const sec = Math.floor(rest % dayInMinutes);
     let time = '';
-    if (Math.floor(day) > 0) {
-        time = Math.floor(day) + 'd ';
+    if (!time.length) {
+        return '0s';
     }
-    if (Math.floor(h) > 0) {
-        time += Math.floor(h) + 'h ';
+    if (day > 0) {
+        time = day + 'd ';
     }
-    if (Math.floor(min) > 0) {
-        time += Math.floor(min) + 'm ';
+    if (hours > 0) {
+        time += hours + 'h ';
+    }
+    if (min > 0) {
+        time += min + 'm ';
     } 
-    if (Math.floor(sec) > 0) {
-        time += Math.floor(sec) + 's';
+    if (sec > 0) {
+        time += sec + 's';
     } 
-    if (!time.length)
-        time = `0s`;
+
     return time.trim();
 }
     
