@@ -1,18 +1,19 @@
-const dayInSeconds = 86400;
-const dayInHours = 3600;
-const minutes = 60;
+const minuteInSeconds = 60;
+const hourInSeconds = minuteInSeconds * 60;
+const dayInSeconds = hourInSeconds * 24;
 
 const formatDate = (timeInSeconds) => {
+  if (!timeInSeconds) {
+    return '0s';
+  }
     const day = Math.floor(timeInSeconds / dayInSeconds);
     let rest = timeInSeconds % dayInSeconds;
-    const hours = Math.floor(rest / dayInHours);
-    rest = rest % dayInHours;
-    const min =  Math.floor(rest / minutes);
-    const sec = Math.floor(rest % minutes);
+    const hours = Math.floor(rest / minuteInSeconds);
+    rest = rest % minuteInSeconds;
+    const min =  Math.floor(rest / minuteInSeconds);
+    const sec = Math.floor(rest % minuteInSeconds);
     let time = '';
-    if (!timeInSeconds) {
-        return '0s';
-    }
+
     if (day > 0) {
         time = day + 'd ';
     }
